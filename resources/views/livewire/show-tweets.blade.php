@@ -1,4 +1,11 @@
 <div>
+
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit">Logout</button>
+      </form>
+
+      <br><br>
     <p>{{ $content }}</p>
 
     <form method="post" wire:submit.prevent="create">

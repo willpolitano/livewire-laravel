@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Tweet;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Http\Request;
 
 class ShowTweets extends Component
 {
@@ -18,20 +19,19 @@ class ShowTweets extends Component
 
     public function render()
     {
-        $tweets = Tweet::with('user')->paginate(3);
+        $tweets = Tweet::with('user')->latest()->paginate(3);
 
         return view('livewire.show-tweets', [
             'tweets' => $tweets
         ]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $this->validate();
 
-        Tweet::create([
-            'content' => $this->content,
-            'user_id' => 1
+        auth()->user()->tweets()->create([
+            'content' => $this->content
         ]);
 
         $this->content = '';
