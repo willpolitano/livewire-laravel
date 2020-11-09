@@ -13,4 +13,8 @@
         {{ $tweet->user->name }} - {{ $tweet->content }}
         <br>
     @endforeach
+
+    <hr>
+
+    {{ $tweets->links("pagination::bootstrap-4") }}
 </div>
